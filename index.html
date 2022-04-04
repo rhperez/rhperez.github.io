@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>A6_RHPL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+  <p>&nbsp;</p>
+<p>T&Eacute;CNICAS DE CONSTRUCCI&Oacute;N DE SERVICIOS WEB</p>
+<p><strong>Actividad 5: Proyecto Integrador Etapa 1</strong></p>
+<p>Alumno:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Roberto Horacio P&eacute;rez L&oacute;pez</p>
+<p>Cuenta:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 020161930</p>
+<p>Profesor:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Manuel Triana Vega</p>
+<p>Fecha: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 27 de marzo de 2022</p>
+<p>&nbsp;</p>
+<p><strong>INTRODUCCI&Oacute;N </strong></p>
+<p><strong>&nbsp;</strong></p>
+<p>El presente proyecto integrador busca aplicar todos los conocimientos adquiridos a lo largo del curso en un caso de aplicaci&oacute;n dentro de mi &aacute;rea laboral, tomando como referencia actividades desarrolladas anteriormente.</p>
+<p>En la primera etapa del proyecto integrador analizaremos una problem&aacute;tica en mi lugar de trabajo con potencial para ser abordada mediante un servicio Web, y a partir de esta problem&aacute;tica generaremos una propuesta de proyecto de servicio web, describiendo la metodolog&iacute;a a utilizar y justificando la arquitectura elegida.</p>
+<p>En la segunda etapa generaremos el dise&ntilde;o de la arquitectura del servicio web a desarrollar, definiendo los elementos y las pruebas necesarias para asegurar su funcionamiento. Finalmente, en la tercera etapa realizaremos el desarrollo del servicio Web basado en alguna de las arquitecturas SOAP o REST.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>PRIMERA ETAPA: PROPUESTA DE PROYECTO DE SERVICIO WEB</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p><strong>Breve descripci&oacute;n de la organizaci&oacute;n</strong></p>
+<p>Actualmente me desempe&ntilde;o como desarrollador en la subdirecci&oacute;n de inform&aacute;tica para un Centro P&uacute;blico de Investigaci&oacute;n (CPI), adscrito al Consejo Nacional de Ciencia y Tecnolog&iacute;a (CONACyT). En este CPI se desarrollan investigaciones en Ciencias Sociales y Humanidades, cuenta con programas acad&eacute;micos de licenciatura y posgrados, servicio de biblioteca de acceso p&uacute;blico, programas de becas y servicios de edici&oacute;n, publicaci&oacute;n y comercializaci&oacute;n de libros y revistas de ciencias sociales. El principal sector al que atiende este CPI es el sector acad&eacute;mico, aunque est&aacute; abierto al p&uacute;blico en general.</p>
+<p>&nbsp;</p>
+<p><strong>Impacto de los servicios Web en esta organizaci&oacute;n</strong></p>
+<p>El uso de servicios Web ha sido esencial dentro de este CPI. Un caso representativo es el de la biblioteca, cuyo acceso a art&iacute;culos cient&iacute;ficos en otras plataformas se realiza mediante servicios Web. De igual manera, algunos servicios que tienen que ver con tr&aacute;mites con el CONACyT o con el gobierno, con el timbrado de recibos de n&oacute;mina de los trabajadores o con el trabajo desde casa tambi&eacute;n emplean servicios Web.</p>
+<p>&nbsp;</p>
+<p><strong>Descripci&oacute;n del problema a atender</strong></p>
+<p>Como mencionaba en la actividad anterior, en este CPI existe la direcci&oacute;n de publicaciones y la direcci&oacute;n de comercializaci&oacute;n. Publicaciones se encarga de imprimir tirajes de libros y revistas, almacenarlos y distribuirlos, contando con un sistema inform&aacute;tico en donde se lleva el control del inventario de libros disponibles, entradas, salidas, t&iacute;tulos nuevos, descontinuados, en mal estado, etc. Por su parte, Comercializaci&oacute;n se encarga de la venta de libros y revistas a trav&eacute;s de distintos canales de ventas (tiendas f&iacute;sicas, librer&iacute;a en l&iacute;nea, ferias de libros, etc.). Para ello, la direcci&oacute;n de comercializaci&oacute;n cuenta con su propio sistema basado en Web, desde el cu&aacute;l se gestionan las &oacute;rdenes de compra.</p>
+<p>Evidentemente, ambas direcciones deben compartir informaci&oacute;n: las &oacute;rdenes generadas en el sistema de comercializaci&oacute;n se convierten en solicitudes de salida de libros en el sistema de publicaciones, mientras que cambios en los inventarios desde el sistema de publicaciones (nuevos t&iacute;tulos, existencias disponibles, etc.) deben reflejarse en el sistema de comercializaci&oacute;n. Actualmente esta comunicaci&oacute;n se realiza de manera manual, lo cual ha causado problemas para ambas direcciones. Por ejemplo, &oacute;rdenes de compra generadas en el sistema de comercializaci&oacute;n que no pueden ser completadas porque alguno de los t&iacute;tulos ya no cuenta con existencias en el sistema de publicaciones.</p>
+<p>Es por ello por lo que resulta necesario desarrollar un servicio Web que permita comunicar de manera autom&aacute;tica ambos sistemas, de modo que todos los cambios en uno de los sistemas se vean reflejados inmediatamente en el otro.</p>
+<p><strong>Descripci&oacute;n de la metodolog&iacute;a para desarrollar el servicio Web</strong></p>
+<p>La metodolog&iacute;a por seguir para el desarrollo del servicio Web ser&aacute; la siguiente:</p>
+<ol>
+<li>Identificar las solicitudes o requests que necesitar&aacute; realizar cada sistema de su contraparte. Por ejemplo, el sistema de publicaciones necesitar&aacute; lanzar un request para actualizar el cat&aacute;logo de comercializaci&oacute;n en cuanto registre un nuevo t&iacute;tulo disponible, mientras que el sistema de comercializaci&oacute;n necesitar&aacute; lanzar un request para surtir una orden de compra.</li>
+<li>Definir la arquitectura del servicio Web. Dependiendo de la naturaleza del servicio, se podr&aacute; optar por una arquitectura SOAP, REST o alguna otra. En primera instancia, se propone el uso de una arquitectura REST.</li>
+<li>Definir el formato o protocolo en el que se transportar&aacute; la informaci&oacute;n. Esto ir&aacute; de la mano con la arquitectura elegida. En este caso, se propone el uso del formato JSON.</li>
+<li>Comenzar el desarrollo, escribiendo el c&oacute;digo de la aplicaci&oacute;n Web.</li>
+<li>Verificaci&oacute;n y pruebas. Una vez desarrollada la aplicaci&oacute;n, se implementar&aacute; en un ambiente de pruebas para asegurar el correcto flujo de la informaci&oacute;n.</li>
+<li>Implementaci&oacute;n. Ya probada la funcionalidad del servicio, se lanzar&aacute; a producci&oacute;n.</li>
+</ol>
+<p><strong>Justificaci&oacute;n de la arquitectura elegida.</strong></p>
+<p>Considero que el servicio a desarrollar no requiere de una estructura de datos muy sofisticada, pues la informaci&oacute;n compartida no requiere de mayor seguridad que la ofrecida por la misma red interna en la que operar&aacute; (no se plantea compartir informaci&oacute;n sensible, como n&uacute;meros bancarios ni contrase&ntilde;as), de modo que resulta m&aacute;s simple utilizar un servicio REST, que es m&aacute;s ligero.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>SEGUNDA ETAPA: DISE&Ntilde;O DE LA ARQUITECTURA DEL SERVICIO WEB</strong></p>
+<p><strong>Definici&oacute;n de fuentes de datos a utilizar</strong></p>
+<p>Las fuentes de datos para este servicio se encuentran en la base de datos del sistema de Comercializaci&oacute;n (que llamaremos BDCOM) y la base de datos del sistema de Publicaciones (que llamaremos BDPUB).</p>
+<p>De estas dos bases de datos, la informaci&oacute;n que nos interesa se encuentra en las tablas listadas a continuaci&oacute;n:</p>
+<table>
+<tbody>
+<tr>
+<td colspan="2" width="598">
+<p><strong>Sistema de Comercializaci&oacute;n (BDCOM)</strong></p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p><strong>Tabla</strong></p>
+</td>
+<td width="400">
+<p><strong>Descripci&oacute;n</strong></p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Cliente</p>
+</td>
+<td width="400">
+<p>Contiene la informaci&oacute;n b&aacute;sica del cliente (nombre, rfc, email, tel&eacute;fono)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Art&iacute;culo</p>
+</td>
+<td width="400">
+<p>Contiene informaci&oacute;n de los t&iacute;tulos del cat&aacute;logo (sku, titulo, autor, ISBN/ISSN, peso, dimensiones, editorial)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Direccion_facturacion</p>
+</td>
+<td width="400">
+<p>Contiene la direcci&oacute;n de facturaci&oacute;n del cliente (calle, n&uacute;mero exterior e interior, colonia, ciudad, estado, referencias)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Direccion_envio</p>
+</td>
+<td width="400">
+<p>Contiene la direcci&oacute;n de env&iacute;o del cliente (calle, n&uacute;mero exterior e interior, colonia, ciudad, estado, referencias)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Orden_compra</p>
+</td>
+<td width="400">
+<p>Contiene el encabezado de una orden de compra (fecha, cantidad de t&iacute;tulos, subtotal, total, estatus)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Detalle_orden</p>
+</td>
+<td width="400">
+<p>Contiene el detalle de una orden de compra (sku del art&iacute;culo, cantidad, precio unitario)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Comprobante_compra</p>
+</td>
+<td width="400">
+<p>Contiene la informaci&oacute;n del comprobante de compra (n&uacute;mero de referencia, importe, autorizacion)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table>
+<tbody>
+<tr>
+<td colspan="2" width="598">
+<p><strong>Sistema de Publicaciones (BDPUB)</strong></p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p><strong>Tabla</strong></p>
+</td>
+<td width="400">
+<p><strong>Descripci&oacute;n</strong></p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Art&iacute;culo</p>
+</td>
+<td width="400">
+<p>Contiene informaci&oacute;n de los t&iacute;tulos de publicaciones (sku, titulo, autor, ISBN/ISSN, peso, dimensiones, editorial)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Inventario</p>
+</td>
+<td width="400">
+<p>Contiene la informaci&oacute;n de existencias de los t&iacute;tulos en el almac&eacute;n (sku, estante, existencias, defectuosos)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Movimiento</p>
+</td>
+<td width="400">
+<p>Contiene el registro de los movimientos de entradas y salidas del almac&eacute;n (cantidad total, tipo de movimiento, fecha del movimiento, autorizaci&oacute;n)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Detalle_movimiento</p>
+</td>
+<td width="400">
+<p>Contiene la informaci&oacute;n del detalle de movimiento (sku, cantidad)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Solicitud</p>
+</td>
+<td width="400">
+<p>Contiene la informaci&oacute;n de una solicitud de orden de compra (id de la orden de compra, cantidad total, fecha)</p>
+</td>
+</tr>
+<tr>
+<td width="198">
+<p>Detalle_solicitud</p>
+</td>
+<td width="400">
+<p>Contiene la informaci&oacute;n del detalle de una solicitud (sku, cantidad)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><strong>Procesos de extracci&oacute;n, transformaci&oacute;n y carga de datos</strong></p>
+<p>El proceso de extracci&oacute;n, transformaci&oacute;n y carga de datos para este desarrollo se manejar&aacute; de manera bidireccional entre ambos sistemas.</p>
+<p>&nbsp;</p>
+<p><strong>Mecanismos e infraestructura para el almacenamiento y gesti&oacute;n de datos</strong></p>
+<p>Los mecanismos e infraestructura para el almacenamiento de datos ya est&aacute;n dados por los sistemas actuales. Ambas bases de datos est&aacute;n montadas en ORACLE y manejadas desde ORACLE SQL Developer.</p>
+<p><strong>Interfaz de usuario a utilizar</strong></p>
+<p>Las interfaces de usuario a utilizar est&aacute;n determinadas por los sistemas actuales: el sistema de comercializaci&oacute;n emplea un sitio web de compras en l&iacute;nea, y otro sitio web interno para los usuarios del &aacute;rea de comercializaci&oacute;n.; en el caso de publicaciones existe un sitio web interno para el manejo de los usuarios del almac&eacute;n.</p>
+<p><strong>Mecanismos de seguridad</strong></p>
+<p>Dado que se manejan algunos datos sensibles, como direcciones domiciliarias y datos personales de clientes, resulta necesario agregar una capa de seguridad. Esta capa de seguridad recaer&aacute; en crear conexiones seguras de comunicaci&oacute;n entre ambos sistemas. Ambos sistemas est&aacute;n montados en servidores Apache, de modo que emplearemos la librer&iacute;a OpenSSL para encriptar las comunicaciones.</p>
+<p><strong><br /> </strong></p>
+<p><strong>&nbsp;</strong></p>
+<p><strong>REFERENCIAS</strong></p>
+<ul>
+<li>Video2bail (productor). (22 de mayo). <em>Tutorial Fundamentos de la programaci&oacute;n: Servicios web: &iquest;Qu&eacute; es un servicio web? | video2brain</em> [archivo de Video]. Recuperado de <a href="https://www.youtube.com/watch?v=KU3V25XABgg">https://www.youtube.com/watch?v=KU3V25XABgg</a></li>
+<li>Flores, J. (Productor). (22 de marzo de 2016). <em>01 02 Tipos de web services</em> [archivo de Video]. Recuperado de <a href="https://www.youtube.com/watch?v=wSl6SvGvthg">https://www.youtube.com/watch?v=wSl6SvGvthg</a></li>
+<li>Infraestructura de Datos Espaciales para el Distrito Capital &ndash; IDECA (2016). <a href="https://uvmonline.blackboard.com/bbcswebdav/pid-7416467-dt-content-rid-185955109_1/xid-185955109_1"><em>Gu&iacute;a pr&aacute;ctica para la creaci&oacute;n de Servicios web bajo los principios de interoperabilidad web segura</em></a> [archivo PDF]. Recuperado de <a href="https://www.ideca.gov.co/sites/default/files/documentacion/instructivoguia-practica-creacion-servicios-web.pdf">https://www.ideca.gov.co/sites/default/files/documentacion/instructivoguia-practica-creacion-servicios-web.pdf</a></li>
+<li>Red Hat. (8 de abril, 2019). <em>Diferencias entre REST y SOAP</em>. Red Hat [Sitio Web]. Recuperado de <a href="https://www.redhat.com/es/topics/integration/whats-the-difference-between-soap-rest">https://www.redhat.com/es/topics/integration/whats-the-difference-between-soap-rest</a></li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>
